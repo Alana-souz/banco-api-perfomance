@@ -60,24 +60,30 @@ Clone o repositório e instale as dependências:
 ```bash
 git clone https://github.com/Alana-souz/banco-api-perfomance.git
 cd banco-api-perfomance
-npm install
 ```
 
-### Configuração
-Defina a variável de ambiente **`BASE_URL`** com a URL da API a ser testada.  
-Exemplo (Linux/Mac):
+###  Configure as Variáveis de Ambiente
+
+Altere o arquivo `config.local.json` e defina a URL base da API a ser testada:
+
+```json
+{
+    "baseUrl": "http://localhost:3000"
+}
+```
+
+> 💡 Essas variáveis serão usada dinamicamente nos testes para montar as requisições.
+
+### 🚀 Execução dos testes
+
 ```bash
-export BASE_URL=https://sua-api.com
+k6 run tests/login.test.js
 ```
+Certifique-se de passar a variável de ambiente `BASE_URL`, caso não esteja usando um `config.local.json` ou uma abordagem de carregamento automático:
 
-No Windows (PowerShell):
-```powershell
-$env:BASE_URL="https://sua-api.com"
+```bash
+k6 run tests/autenticacao/login.test.js -e BASE_URL=http://localhost:3000
 ```
-
----
-
-## 🚀 Execução dos testes
 
 Para executar os testes com acompanhamento em tempo real via dashboard do **k6** e exportação do relatório em HTML:  
 
